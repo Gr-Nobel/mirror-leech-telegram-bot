@@ -84,12 +84,12 @@ class MirrorListener(listeners.MirrorListeners):
                 LOGGER.info(f'Zip: orig_path: {m_path}, zip_path: {path}')
                 if pswd is not None:
                     if self.isLeech and int(size) > TG_SPLIT_SIZE:
-                        path = m_path + "_zip"
+                        path = m_path + ".zip"
                         subprocess.run(["7z", f"-v{TG_SPLIT_SIZE}b", "a", "-mx=0", f"-p{pswd}", path, m_path])
                     else:
                         subprocess.run(["7z", "a", "-mx=0", f"-p{pswd}", path, m_path])
                 elif self.isLeech and int(size) > TG_SPLIT_SIZE:
-                    path = m_path + "_zip"
+                    path = m_path + ".zip"
                     subprocess.run(["7z", f"-v{TG_SPLIT_SIZE}b", "a", "-mx=0", path, m_path])
                 else:
                     subprocess.run(["7z", "a", "-mx=0", path, m_path])
@@ -432,7 +432,7 @@ def _mirror(bot, update, isZip=False, extract=False, isQbit=False, isLeech=False
         if not isZip and not extract and not isLeech:
             gmsg = f"Use /{BotCommands.CloneCommand} to clone Google Drive file/folder\n\n"
             gmsg += f"Use /{BotCommands.ZipMirrorCommand} to make zip of Google Drive folder\n\n"
-            gmsg += f"Use /{BotCommands.UnzipMirrorCommand} to extracts archive Google Drive file"
+            gmsg += f"Use /{BotCommands.UnzipMirrorCommand} to extracts Google Drive archive file"
             sendMessage(gmsg, bot, update)
             return
         gd_dl = GdDownloadHelper()
